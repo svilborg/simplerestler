@@ -16,7 +16,10 @@ class Document:
         methods = [ 
         "ul", # Unorderd list - # XX
         "ol", # Orderd list - 1. XX
-        "link", # Orderd list - 1. XX
+        "link", # Link
+        "image", # Image
+        "title", # Title
+        "hr", # Hr
         ]
 
     def add(self, line):
@@ -26,7 +29,13 @@ class Document:
         if method == "ul" :
             return element.UlElement( parent=self )
         elif method == "ol":
-            return element.OlElement( parent=self )
+            return element.OlElement( parent=self ) 
+        elif method == "image":
+            return element.ImageElement( parent=self )
+        elif method == "title":
+            return element.TitleElement( parent=self )
+        elif method == "hr":
+            return element.HrElement( parent=self )
         else:
             raise errors.InvalidMethodError(method)
 
