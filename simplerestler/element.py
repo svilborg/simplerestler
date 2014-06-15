@@ -84,7 +84,17 @@ class OlElement(Element):
         return Element.__str__(self)
 
 class FlistElement(Element):
-    """Field List Element."""
+    """Field List Element.
+
+        :Date: 2001-08-16
+        :Version: 1
+        :Authors: - Me
+                  - Myself
+                  - I
+        :Indentation: Since the field marker may be quite long, the second
+           and subsequent lines of the field body do not have to line up
+
+    """
 
     def __init__( self, parent=None): 
         Element.__init__(self, "flist", parent)
@@ -101,7 +111,7 @@ class FlistElement(Element):
         if len(kwargs) > 1:
             for field in sorted(kwargs):
                 value = Utils.html_rest(kwargs[field])
-                
+
                 self.add(':'+ field +': ' + value)
                 self.add('\n')
 
