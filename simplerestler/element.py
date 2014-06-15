@@ -44,7 +44,7 @@ class UlElement(Element):
 
         for arg in args:
 
-            line = "* " + arg
+            line = "* " + Utils.html_rest(arg)
             self.add(line)
             self.add('\n')
         
@@ -71,7 +71,7 @@ class OlElement(Element):
         i = 0
         for arg in args:
             i +=1 
-            line = str(i) + ". " + arg
+            line = str(i) + ". " + Utils.html_rest(arg)
             self.add(line)
             self.add('\n')
 
@@ -123,6 +123,35 @@ class PElement(Element):
         text = Utils.br_rest(text)
 
         self.add('\n')
+        self.add(text)
+        self.add('\n')
+
+        return self
+
+    def __str__( self ):
+
+        return Element.__str__(self)
+
+class PreElement(Element):
+    """Pre - Literal Block """
+
+    def __init__( self, parent=None): 
+        Element.__init__(self, "hr", parent)
+    
+    def __call__( self, *args, **kwargs ):
+        
+        text = ""
+
+        if len(kwargs) != 0:
+            text = kwargs.get('text', "")
+        elif len(args) != 0:
+            text = args[0]
+
+        self.add('\n')
+        self.add('::')
+        self.add('\n')
+        self.add('\n')
+        self.add(' ')
         self.add(text)
         self.add('\n')
 

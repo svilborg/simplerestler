@@ -72,5 +72,20 @@ This **paragraph** is on the first line
 
         self.assertEqual(str(p), result)        
 
+
+    def test_document_p(self):
+        """Pre Tests"""
+        d = simplerestler.Document()
+        pre = d.pre("Literal - * and ** and ``")
+
+        result = """
+::
+
+ Literal - * and ** and ``
+"""
+
+        self.assertEqual(str(pre), result)
+
+
 if __name__ == '__main__':
     unittest.main()

@@ -15,6 +15,7 @@ class Document:
         "image", # Image
         "title", # Title
         "p", # Paragraph
+        "pre", # Literal Block
         "hr", # Hr
         "directive", #Block 
         "comment", #comment 
