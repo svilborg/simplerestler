@@ -1,4 +1,5 @@
 """ Elements """
+import errors
 
 class Element:
     """Element."""
@@ -83,7 +84,7 @@ class OlElement(Element):
  
 class HrElement(Element):
     """Hr or Transaition Element . A transition marker is a horizontal line
-of 4 or more repeated punctuation ----- """
+        of 4 or more repeated punctuation ----- """
 
     def __init__( self, parent=None): 
         Element.__init__(self, "hr", parent)
@@ -102,9 +103,67 @@ of 4 or more repeated punctuation ----- """
 
         return Element.__str__(self)
 
+class ParaElement(Element):
+    """Paragraph """
+
+    def __init__( self, parent=None): 
+        Element.__init__(self, "hr", parent)
+    
+    def __call__( self, *args, **kwargs ):
+
+        if len(kwargs) != 0:
+            text = kwargs.get('text', "")
+        elif len(arg) != 0:
+            text = args[0]
+
+        self.add(text)
+        self.add('\n')
+
+        return self
+
+    def __str__( self ):
+
+        return Element.__str__(self)
+
+class CommentElement(Element):
+    """Comment
+    .. This text will not be shown
+       Second line
+
+     """
+
+    def __init__( self, parent=None): 
+        Element.__init__(self, "hr", parent)
+    
+    def __call__( self, *args, **kwargs ):
+
+        if len(kwargs) != 0:
+            text = kwargs.get('text', "")
+        elif len(arg) > 0:
+            text = args[0]
+
+        if text is None:
+            raise errors.InvalidElementError("text")
+
+        self.add('.. ' + text)
+        self.add('\n')
+
+        return self
+
+    def __str__( self ):
+
+        return Element.__str__(self)
+
+        
 class ImageElement(Element):
     """Image Element. 
+
         .. image:: images/ball1.gif 
+           :height: 100px
+           :width: 200 px
+           :scale: 50 %
+           :alt: alternate text
+           :align: right
     """
 
     def __init__( self, parent=None): 
@@ -112,14 +171,31 @@ class ImageElement(Element):
     
     def __call__( self, *args, **kwargs ):
        
-        if len(kwargs) != 0:
-            src = kwargs.get('src', "")
-            text = kwargs.get('text', "")
-        elif len(arg) != 0:
-            src  = args[0]
-            text = args[1]
+        src = None
+        options = {}
 
-        self.add('image:: ' + src)
+        if len(kwargs) != 0:
+            src = kwargs.get('src', None)
+        elif len(args) > 0:
+            src  = args[0]
+
+        if src is None:
+            raise errors.InvalidElementError("src")
+
+        self.add('\n')
+        self.add('.. image:: ' + src)
+
+        if len(kwargs) > 1:
+            for option in sorted(kwargs):
+                if option != "src":
+                    self.add('\n')
+                    self.add('   :'+option+': ' + kwargs[option])
+                    # options
+                    # print option
+                    # print kwargs[option]
+                pass
+
+        self.add('\n')
 
         return self
 
@@ -195,7 +271,7 @@ class LinkElement(Element):
         if len(kwargs) != 0:
             href = kwargs.get('href', "")
             text = kwargs.get('text', "")
-        elif len(arg) != 0:
+        elif len(args) != 0:
             href = args[0]
             text = args[1]
 
@@ -233,7 +309,7 @@ class DirectiveElement(Element):
             type  = kwargs.get('type', "")
             title = kwargs.get('title', "")
             text  = kwargs.get('text', "")
-        elif len(arg) != 0:
+        elif len(args) != 0:
             type  = args[0]
             title = args[1]
             text  = args[2]
@@ -254,11 +330,8 @@ class DirectiveElement(Element):
 
 class TableElement(Element):
     """
-    Directive Element
+    Table Element
 
-.. note:: Note
-
-   This is content
 
 """
 

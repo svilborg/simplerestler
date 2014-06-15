@@ -1,18 +1,10 @@
 import unittest
 import simplerestler
 
-class DocumentTestCase(unittest.TestCase):
-    """Tests for `document.py`."""
+class ElementsTestCase(unittest.TestCase):
+    """Tests for `elements.py`."""
 
-    def test_document_elements_image(self):
-        """Image Tests"""
-        d = simplerestler.Document()
-        image = d.image(src="http://google.com/image.png")
-
-        self.assertIsInstance(image, simplerestler.element.Element)
-
-
-    def test_document_elements(self):
+    def test_document_lists(self):
         """Lists Tests"""
         d = simplerestler.Document()
         ul = d.ul("One", "Two", "Three")
@@ -37,6 +29,18 @@ class DocumentTestCase(unittest.TestCase):
 """
 
         self.assertEqual(str(d), result)
+
+#     def test_document_comments(self):
+#         """Comments Tests"""
+#         d = simplerestler.Document()
+#         ul = d.comment("Comment text")
+
+#         result = """
+# .. Comment text
+
+# """
+
+#         self.assertEqual(str(d), result)
 
 if __name__ == '__main__':
     unittest.main()
