@@ -11,9 +11,11 @@ sys.path.insert(0, os.path.join(_top_dir, "lib"))
 del sys.path[0]
 README = open(os.path.join(_top_dir, 'README.md')).read()
 
+import simplerestler
+
 setup(
-    name='simplerester',
-    version=simplerester.__version__,
+    name='simplerestler',
+    version=simplerestler.__version__,
     description="Simple reStructuredText Builder",
     long_description=README,
     
@@ -21,7 +23,7 @@ setup(
     author_email='',
     maintainer='Svilborg',
     maintainer_email='',
-    url='http://github.com/svilborg/simplerester',
+    url='http://github.com/svilborg/simplerestler',
 
     classifiers=[c.strip() for c in """
         Development Status :: 1 - Planning
@@ -36,8 +38,8 @@ setup(
     keywords='Simple reStructuredText Builder',
 
     license='MIT',
-    py_modules=["simplerester"],
-    package_dir={"simplerester": "simplerester"},
+    py_modules=["simplerestler"],
+    package_dir={"simplerestler": "simplerestler"},
     include_package_data=True,
     zip_safe=False,
 )
