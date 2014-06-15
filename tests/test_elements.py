@@ -41,18 +41,36 @@ class ElementsTestCase(unittest.TestCase):
 
 """
 
-#         self.assertEqual(str(comment), result)        
+        self.assertEqual(str(comment), result)        
 
-#         comment = d.comment("Comment text\nHere")
+    def test_document_p(self):
+        """Paragraph Tests"""
+        d = simplerestler.Document()
+        p = d.p("This paragraph is on the first line This is the same line")
 
-#         result = """
+        result = """
+This paragraph is on the first line This is the same line
+"""
 
-# .. Comment text
+        self.assertEqual(str(p), result)
 
-# """
-#         print comment
-#         print result
-#         self.assertEqual(str(comment), result)
+        p = d.p("This paragraph is on the first line\nThis is a new line")
+
+        result = """
+This paragraph is on the first line
+ This is a new line
+"""
+
+        self.assertEqual(str(p), result) 
+
+        p = d.p("This <b>paragraph</b> is on the first line<br/>This is a new line")
+
+        result = """
+This **paragraph** is on the first line
+ This is a new line
+"""
+
+        self.assertEqual(str(p), result)        
 
 if __name__ == '__main__':
     unittest.main()

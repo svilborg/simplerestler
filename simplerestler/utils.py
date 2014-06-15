@@ -3,19 +3,30 @@ class Utils(object):
     """Utils - Common functions"""
     
     @staticmethod
-    def html_escape(text):
+    def html_rest(text):
         """Produce entities within text."""
         tag_names = {
         "em": "*",
-        
+
         "b": "**",
         "string": "**",
+        "code" : "``",
         }
 
         for tag, new in tag_names.iteritems():
             text = Utils.ireplace('<' + tag + '>', new, text)
             text = Utils.ireplace('</' + tag + '>', new, text)
         
+        return text
+
+    @staticmethod
+    def br_rest(text):
+        """ New Lines to reSt"""
+
+        text = "\n ".join(text.split("\n"))
+        text = "\n ".join(text.split("<br/>"))
+        text = "\n ".join(text.split("<br>"))
+
         return text
 
     @staticmethod

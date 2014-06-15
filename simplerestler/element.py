@@ -1,5 +1,6 @@
 """ Elements """
 import errors
+from utils import Utils
 
 class Element:
     """Element."""
@@ -103,19 +104,25 @@ class HrElement(Element):
 
         return Element.__str__(self)
 
-class ParaElement(Element):
+class PElement(Element):
     """Paragraph """
 
     def __init__( self, parent=None): 
         Element.__init__(self, "hr", parent)
     
     def __call__( self, *args, **kwargs ):
+        
+        text = ""
 
         if len(kwargs) != 0:
             text = kwargs.get('text', "")
         elif len(args) != 0:
             text = args[0]
 
+        text = Utils.html_rest(text)
+        text = Utils.br_rest(text)
+
+        self.add('\n')
         self.add(text)
         self.add('\n')
 
@@ -156,8 +163,7 @@ class CommentElement(Element):
     def __str__( self ):
 
         return Element.__str__(self)
-
-        
+     
 class ImageElement(Element):
     """Image Element. 
 
@@ -210,16 +216,16 @@ class TitleElement(Element):
     """
     Titles 
 
-    Chepter One
-    ***********
+        Chepter One
+        ***********
 
-    # with overline, for parts
-    * with overline, for chapters
-    =, for sections
-    -, for subsections
-    ^, for subsubsections
-    ", for paragraphs
-"""
+        # with overline, for parts
+        * with overline, for chapters
+        =, for sections
+        -, for subsections
+        ^, for subsubsections
+        ", for paragraphs
+    """
 
     def __init__( self, parent = None): 
 
@@ -261,7 +267,7 @@ class LinkElement(Element):
     Link Element
 
     `Python <http://www.python.org/>`_ 
-"""
+    """
 
     def __init__( self, parent=None): 
         Element.__init__(self, "link", parent)
@@ -293,11 +299,11 @@ class DirectiveElement(Element):
     """
     Directive Element
 
-.. note:: Note
+    .. note:: Note
 
-   This is content
+    This is content
 
-"""
+    """
 
     def __init__( self, parent=None): 
         Element.__init__(self, "directive", parent)
@@ -336,7 +342,7 @@ class TableElement(Element):
     Table Element
 
 
-"""
+    """
 
     def __init__( self, parent=None): 
         Element.__init__(self, "table", parent)

@@ -14,7 +14,7 @@ class Document:
         "link", # Link
         "image", # Image
         "title", # Title
-        "para", # Paragraph
+        "p", # Paragraph
         "hr", # Hr
         "directive", #Block 
         "comment", #comment 

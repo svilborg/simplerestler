@@ -16,8 +16,8 @@ class UtilsTestCase(unittest.TestCase):
         self.assertEqual("Live on radio", Utils.ireplace("TV", "radio", "Live on tV"))
         self.assertEqual("Live on radio", Utils.ireplace("tv", "radio", "Live on tV"))
 
-        # self.assertEqual("**Live** on **TV**", Utils.html_escape("<b>Live</b> on <B>TV</B>"))
-        self.assertEqual("*Live* on **TV**", Utils.html_escape("<em>Live</em> on <B>TV</B>"))
+        self.assertEqual("**Live** on **TV**", Utils.html_rest("<b>Live</b> on <B>TV</B>"))
+        self.assertEqual("*Live* on **TV**", Utils.html_rest("<em>Live</em> on <B>TV</B>"))
         
 if __name__ == '__main__':
     unittest.main()
