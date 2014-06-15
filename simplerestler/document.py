@@ -17,6 +17,7 @@ class Document:
         "para", # Paragraph
         "hr", # Hr
         "directive", #Block 
+        "comment", #comment 
     )
 
     def __init__( self ):

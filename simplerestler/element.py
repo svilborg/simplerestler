@@ -113,7 +113,7 @@ class ParaElement(Element):
 
         if len(kwargs) != 0:
             text = kwargs.get('text', "")
-        elif len(arg) != 0:
+        elif len(args) != 0:
             text = args[0]
 
         self.add(text)
@@ -139,13 +139,16 @@ class CommentElement(Element):
 
         if len(kwargs) != 0:
             text = kwargs.get('text', "")
-        elif len(arg) > 0:
+        elif len(args) > 0:
             text = args[0]
 
         if text is None:
             raise errors.InvalidElementError("text")
 
+        self.add('\n')
+        self.add('\n')
         self.add('.. ' + text)
+        self.add('\n')
         self.add('\n')
 
         return self
@@ -342,7 +345,7 @@ class TableElement(Element):
 
         data = None
 
-        if len(arg) != 0:
+        if len(args) != 0:
             data  = args[0]
 
         self.params = args
