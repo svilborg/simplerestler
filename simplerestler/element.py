@@ -82,7 +82,9 @@ class OlElement(Element):
     def __str__( self ):
 
         return Element.__str__(self)
- 
+
+
+
 class HrElement(Element):
     """Hr or Transaition Element . A transition marker is a horizontal line
         of 4 or more repeated punctuation ----- """
@@ -108,7 +110,7 @@ class PElement(Element):
     """Paragraph """
 
     def __init__( self, parent=None): 
-        Element.__init__(self, "hr", parent)
+        Element.__init__(self, "p", parent)
     
     def __call__( self, *args, **kwargs ):
         
@@ -136,7 +138,7 @@ class PreElement(Element):
     """Pre - Literal Block """
 
     def __init__( self, parent=None): 
-        Element.__init__(self, "hr", parent)
+        Element.__init__(self, "pre", parent)
     
     def __call__( self, *args, **kwargs ):
         
@@ -169,7 +171,7 @@ class CommentElement(Element):
      """
 
     def __init__( self, parent=None): 
-        Element.__init__(self, "hr", parent)
+        Element.__init__(self, "comment", parent)
     
     def __call__( self, *args, **kwargs ):
 
