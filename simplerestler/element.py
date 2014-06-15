@@ -4,9 +4,10 @@ class Element:
     """Element."""
 
     def __init__( self, name, parent=None):
-        self.name  = name
+        self.name    = name
         self.params  = [] 
-        self.parent = parent
+        self.parent  = parent
+        self.content = []
     
     def __call__( self, *args, **kwargs ):
 
@@ -14,9 +15,17 @@ class Element:
 
         return self
 
+    def add (self, line):
+        self.content.append(line)
+
+        if self.parent is not None:
+            self.parent.add(line) 
+
+
+        return line
+
     def __str__( self ):
-        
-        return self.name + "[" + ", ".join(self.params) + "]"
+        return ''.join(self.content)
 
 
 class UlElement(Element):
@@ -29,15 +38,15 @@ class UlElement(Element):
 
         self.params = args
 
-        self.parent.add('\n')
+        self.add('\n')
 
         for arg in args:
 
             line = "* " + arg
-            self.parent.add(line)
-            self.parent.add('\n')
+            self.add(line)
+            self.add('\n')
         
-        self.parent.add('\n')
+        self.add('\n')
 
         return self
 
@@ -55,16 +64,16 @@ class OlElement(Element):
 
         self.params = args
 
-        self.parent.add('\n')
+        self.add('\n')
 
         i = 0
         for arg in args:
             i +=1 
             line = str(i) + ". " + arg
-            self.parent.add(line)
-            self.parent.add('\n')
+            self.add(line)
+            self.add('\n')
 
-        self.parent.add('\n')
+        self.add('\n')
 
         return self
 
@@ -72,33 +81,6 @@ class OlElement(Element):
 
         return Element.__str__(self)
  
-class Ol2Element(Element):
-    """Ol Element."""
-
-    def __init__( self, parent=None): 
-        Element.__init__(self, "ol", parent)
-    
-    def __call__( self, *args, **kwargs ):
-
-        self.params = args
-
-        self.parent.add('\n')
-
-        i = 0
-        for arg in args:
-            i +=1 
-            line = str(i) + ". " + arg
-            self.parent.add(line)
-            self.parent.add('\n')
-
-        self.parent.add('\n')
-
-        return self
-
-    def __str__( self ):
-
-        return Element.__str__(self)
-
 class HrElement(Element):
     """Hr or Transaition Element . A transition marker is a horizontal line
 of 4 or more repeated punctuation ----- """
@@ -110,9 +92,9 @@ of 4 or more repeated punctuation ----- """
 
         self.params = "----"
 
-        self.parent.add('\n')
-        self.parent.add('-----------')
-        self.parent.add('\n')
+        self.add('\n')
+        self.add('-----------')
+        self.add('\n')
 
         return self
 
@@ -137,7 +119,7 @@ class ImageElement(Element):
             src  = args[0]
             text = args[1]
 
-        self.parent.add('image:: ' + src)
+        self.add('image:: ' + src)
 
         return self
 
@@ -160,7 +142,8 @@ class TitleElement(Element):
     ", for paragraphs
 """
 
-    def __init__( self, parent=None): 
+    def __init__( self, parent = None): 
+
         Element.__init__(self, "title", parent)
     
     def __call__( self, *args, **kwargs ):
@@ -174,7 +157,7 @@ class TitleElement(Element):
             char = kwargs.get('type', "*")
         elif len(args) !=0:
             text = args[0]
-
+            char = args[1]
 
         length = len(text)
 
@@ -183,16 +166,15 @@ class TitleElement(Element):
 
         self.params = [text, underline]
 
-        self.parent.add('\n')
-        self.parent.add(text)
-        self.parent.add('\n')
-        self.parent.add(underline)
-        self.parent.add('\n')
+        self.add('\n')
+        self.add(text)
+        self.add('\n')
+        self.add(underline)
+        self.add('\n')
 
         return self
 
     def __str__( self ):
-
         return Element.__str__(self)
 
 class LinkElement(Element):
@@ -220,7 +202,7 @@ class LinkElement(Element):
         self.params = [text, underline]
 
         line = "`%s` %s_" % ( text, href )
-        self.parent.add(line)
+        self.add(line)
 
         return self
 
@@ -259,10 +241,10 @@ class DirectiveElement(Element):
         self.params = [type, title, text]
 
         line = ".. %s:: %s" % ( text, title )
-        self.parent.add(line)
-        self.parent.add('\n')
-        self.parent.add('    ' + text)
-        self.parent.add('\n')
+        self.add(line)
+        self.add('\n')
+        self.add('    ' + text)
+        self.add('\n')
 
         return self
 
@@ -294,9 +276,9 @@ class TableElement(Element):
 
         table = self.make_table(data)
 
-        self.parent.add('\n')
-        self.parent.add(table)
-        self.parent.add('\n')
+        self.add('\n')
+        self.add(table)
+        self.add('\n')
 
         return self
     

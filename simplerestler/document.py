@@ -8,12 +8,7 @@ import errors
 class Document:
     """Rest Document."""
 
-    def __init__( self ):
-        
-        self.content = [ ]
-        self.class_= self
-        self.delimiter = '\n'
-        methods = [ 
+    METHODS = (
         "ul", # Unorderd list - # XX
         "ol", # Orderd list - 1. XX
         "link", # Link
@@ -21,31 +16,37 @@ class Document:
         "title", # Title
         "hr", # Hr
         "directive", #Block 
-        ]
+    )
+
+    def __init__( self ):
+        
+        self.content = [ ]
+        self.delimiter = '\n'
 
     def add(self, line):
         self.content.append(line)
 
     def __getattr__( self, method ):
-        if method == "ul" :
-            return element.UlElement( parent=self )
-        elif method == "ol":
-            return element.OlElement( parent=self ) 
-        elif method == "image":
-            return element.ImageElement( parent=self )
-        elif method == "title":
-            return element.TitleElement( parent=self )
-        elif method == "hr":
-            return element.HrElement( parent=self )        
-        elif method == "link":
-            return element.LinkElement( parent=self )
-        elif method == "directive":
-            return element.DirectiveElement( parent=self )
+
+        if method in self.METHODS:
+            className = self.getClassName(method)
+
+            if hasattr(element, className):
+
+                instance = getattr(element, className)
+                
+                return instance(parent=self)
+            else:
+                raise errors.InvalidElementError(className)
         else:
             raise errors.InvalidMethodError(method)
 
+    def getClassName (self, title):
+
+        return title.capitalize() + "Element"
+
+
     def __str__( self ):
-        
         return ''.join(self.content)
 
     def __call__( self, *args, **kwargs ):
