@@ -23,7 +23,7 @@ class DocumentTestCase(unittest.TestCase):
 
 
     def test_document_elements(self):
-        """Lists Tests Output"""
+        """Lists Tests"""
         d = simplerestler.Document()
         ul = d.ul("One", "Two", "Three")
 

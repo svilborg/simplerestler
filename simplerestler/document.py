@@ -20,6 +20,7 @@ class Document:
         "image", # Image
         "title", # Title
         "hr", # Hr
+        "directive", #Block 
         ]
 
     def add(self, line):
@@ -35,7 +36,11 @@ class Document:
         elif method == "title":
             return element.TitleElement( parent=self )
         elif method == "hr":
-            return element.HrElement( parent=self )
+            return element.HrElement( parent=self )        
+        elif method == "link":
+            return element.LinkElement( parent=self )
+        elif method == "directive":
+            return element.DirectiveElement( parent=self )
         else:
             raise errors.InvalidMethodError(method)
 
