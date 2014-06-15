@@ -83,7 +83,35 @@ class OlElement(Element):
 
         return Element.__str__(self)
 
+class FlistElement(Element):
+    """Field List Element."""
 
+    def __init__( self, parent=None): 
+        Element.__init__(self, "flist", parent)
+    
+    def __call__( self, *args, **kwargs ):
+
+        self.params = args
+
+        if len(kwargs) == 0:
+            raise errors.DocumentError("No list fields.")
+
+        self.add('\n')
+
+        if len(kwargs) > 1:
+            for field in sorted(kwargs):
+                value = Utils.html_rest(kwargs[field])
+                
+                self.add(':'+ field +': ' + value)
+                self.add('\n')
+
+        self.add('\n')
+
+        return self
+
+    def __str__( self ):
+
+        return Element.__str__(self)
 
 class HrElement(Element):
     """Hr or Transaition Element . A transition marker is a horizontal line
@@ -230,9 +258,6 @@ class ImageElement(Element):
                 if option != "src":
                     self.add('\n')
                     self.add('   :'+option+': ' + kwargs[option])
-                    # options
-                    # print option
-                    # print kwargs[option]
                 pass
 
         self.add('\n')
