@@ -7,7 +7,7 @@ from setuptools import setup
 
 _top_dir = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.join(_top_dir, "lib"))
-import mpm
+import simplerester
 del sys.path[0]
 README = open(os.path.join(_top_dir, 'README.txt')).read()
 
