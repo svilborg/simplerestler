@@ -45,12 +45,15 @@ class Document:
             raise errors.InvalidMethodError(method)
 
     def getClassName (self, title):
-
         return title.capitalize() + "Element"
 
 
     def __str__( self ):
-        return ''.join(self.content)
+        return ''.join(self.content)    
+
+    def save( self, name ):
+        with open(name, 'w') as rstFile:
+            rstFile.write(str(self))
 
     def __call__( self, *args, **kwargs ):
         """Return the document as a string.
