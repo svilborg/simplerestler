@@ -10,6 +10,7 @@ class Utils(object):
         "b": "**",
         "strong": "**",
         "code" : "``",
+        "tt" : "``",
         }
 
         for tag, new in tag_names.iteritems():

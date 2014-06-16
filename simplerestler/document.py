@@ -19,6 +19,7 @@ class Document:
         "hr", # Hr
         "directive", #Block 
         "comment", #comment 
+        "flist", #Field List
     )
 
     def __init__( self ):

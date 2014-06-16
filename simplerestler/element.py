@@ -306,14 +306,12 @@ class TitleElement(Element):
         if len(kwargs) != 0:
             text = kwargs.get('text', "")
             char = kwargs.get('type', "*")
-        elif len(args) !=0:
+        elif len(args) > 0:
             text = args[0]
-            char = args[1]
+            if len(args) > 1:
+                char =  args[1]
 
-        length = len(text)
-
-        if len(text) > 0:
-            underline = str(char) * length
+        underline = str(char) * len(text)
 
         self.params = [text, underline]
 
@@ -384,15 +382,29 @@ class DirectiveElement(Element):
             type  = kwargs.get('type', "")
             title = kwargs.get('title', "")
             text  = kwargs.get('text', "")
-        elif len(args) != 0:
+        elif len(args) > 0:
             type  = args[0]
-            title = args[1]
-            text  = args[2]
+            
+            if len(args) > 1:
+                title = args[1]
+
+            if len(args) > 2:
+                text  = args[2]
 
         self.params = [type, title, text]
 
-        line = ".. %s:: %s" % ( text, title )
-        self.add(line)
+
+        self.add('\n')
+        self.add(".. %s:: %s" % ( type, title))
+        self.add('\n')
+
+        if len(kwargs) > 1:
+            for option in sorted(kwargs):
+                if option != "type" and option != "text" and option != "title":
+                    self.add('   :'+option+': ' + kwargs[option])
+                    self.add('\n')
+                pass
+
         self.add('\n')
         self.add('    ' + text)
         self.add('\n')
