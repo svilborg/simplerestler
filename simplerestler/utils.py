@@ -7,9 +7,8 @@ class Utils(object):
         """Produce entities within text."""
         tag_names = {
         "em": "*",
-
         "b": "**",
-        "string": "**",
+        "strong": "**",
         "code" : "``",
         }
 
