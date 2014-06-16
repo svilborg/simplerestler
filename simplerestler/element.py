@@ -348,10 +348,11 @@ class LinkElement(Element):
             href = args[0]
             text = args[1]
 
-        self.params = [text, underline]
+        self.params = [text, href]
 
-        line = "`%s` %s_" % ( text, href )
-        self.add(line)
+        self.add('\n')
+        self.add("`%s <%s>`_" % ( text, href ))
+        self.add('\n')
 
         return self
 

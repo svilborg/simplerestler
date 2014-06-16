@@ -22,7 +22,10 @@ if __name__ == '__main__':
 
     doc.image(src="https://avatars2.githubusercontent.com/u/2757518", height="40pt", alt="Icon")
 
-    # doc.directive(type="math", text="10*x + 12*y = z")
+    
+    doc.link(href="http://google.com", text="G00g1e")
+
+    doc.directive(type="math", text="10*x + 12*y = z")
 
 
     doc.directive(type="sidebar", title="News", subtitle="Sport", text="Gooool!")

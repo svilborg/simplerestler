@@ -11,7 +11,7 @@ class Document:
     METHODS = (
         "ul", # Unorderd list - # XX
         "ol", # Orderd list - 1. XX
-        "link", # Link
+        "link", # Link @TODO : a
         "image", # Image
         "title", # Title
         "p", # Paragraph
