@@ -1,9 +1,9 @@
-SimplereStler
+Simple reStler
 ==============
 
-Simple reStructuredText Builder.
-A small python library for building reStructuredText 
+Simple reStructuredText Builder - A small python library for building reStructuredText 
 
+Example :
 
 ```python
 
