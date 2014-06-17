@@ -20,6 +20,7 @@ class Document:
         "directive", #Block 
         "comment", #comment 
         "flist", #Field List
+        "table", #Table
     )
 
     def __init__( self ):

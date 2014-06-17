@@ -430,31 +430,32 @@ class TableElement(Element):
 
         data = None
 
-        if len(args) != 0:
+        if len(args) > 0:
             data  = args[0]
+            
+            if len(data) > 0:
+                self.params = args
 
-        self.params = args
+                table = self.make_table(data)
 
-        table = self.make_table(data)
-
-        self.add('\n')
-        self.add(table)
-        self.add('\n')
+                self.add('\n')
+                self.add(table)
+                self.add('\n')
 
         return self
     
-    def make_table(grid):
+    def make_table(self, grid):
         max_cols = [max(out) for out in map(list, zip(*[[len(item) for item in row] for row in grid]))]
         rst = self.table_div(max_cols, 1)
 
         for i, row in enumerate(grid):
             header_flag = False
             if i == 0 or i == len(grid)-1: header_flag = True
-            rst += normalize_row(row,max_cols)
+            rst += self.normalize_row(row,max_cols)
             rst += self.table_div(max_cols, header_flag )
         return rst
 
-    def table_div(max_cols, header_flag=1):
+    def table_div(self, max_cols, header_flag=1):
         out = ""
         if header_flag == 1:
             style = "="
@@ -467,7 +468,7 @@ class TableElement(Element):
         out += "\n"
         return out
 
-    def normalize_row(row, max_cols):
+    def normalize_row(self, row, max_cols):
         r = ""
         for i, max_col in enumerate(max_cols):
             r += row[i] + (max_col  - len(row[i]) + 1) * " "
