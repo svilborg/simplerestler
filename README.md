@@ -19,8 +19,9 @@ A small python library for building reStructuredText
 
     doc.hr()
 
-    doc.p("<b>Lorem ipsum</b> dolor sit amet, consectetur adipisicing <em>elit</em>, sed do eiusmod tempor " +
-        "incididunt ut labore et dolore magna aliqua.<br/> Ut enim ad minim veniam, quis nostrud exercitation ullamco ..")
+    doc.p("<b>Lorem ipsum</b> dolor sit amet, consectetur adipisicing <em>elit</em>, " + 
+        "sed do eiusmod tempor " +
+        "incididunt ut labore et dolore magna aliqua.<br/> Ut enim ad minim veniam ..")
 
     doc.pre("Same as      here ")
 
