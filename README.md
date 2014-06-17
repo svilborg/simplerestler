@@ -1,4 +1,6 @@
-simplerestler
+[simplerestler][]
 =============
 
-Simple reStructuredText Builder
+Simple reStructuredText Builder.
+A small python library for building reStructuredText 
+
