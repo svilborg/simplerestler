@@ -234,8 +234,9 @@ class LineblockElement(Element):
 
 class CommentElement(Element):
     """Comment
-    .. This text will not be shown
-       Second line
+
+        .. This text will not be shown
+           Second line
 
      """
 
@@ -267,7 +268,7 @@ class CommentElement(Element):
 class ImageElement(Element):
     """Image Element. 
 
-        .. image:: images/ball1.gif 
+        .. image::images/ball1.tiff 
            :height: 100px
            :width: 200 px
            :scale: 50 %
@@ -312,10 +313,6 @@ class ImageElement(Element):
 class TitleElement(Element):
     """
     Titles 
-
-        Chepter One
-        ***********
-
         # with overline, for parts
         * with overline, for chapters
         =, for sections
