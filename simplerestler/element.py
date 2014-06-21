@@ -203,6 +203,35 @@ class PreElement(Element):
 
         return Element.__str__(self)
 
+class LineblockElement(Element):
+    """Line Block 
+        | These lines are
+        | broken exactly like in
+        | the source file.
+    """
+
+    def __init__( self, parent=None): 
+        Element.__init__(self, "pre", parent)
+    
+    def __call__( self, *args, **kwargs ):
+        
+        block = ""
+
+        if len(args) != 0:
+            self.add(NL)
+    
+            for arg in args:
+                block += "| " + arg + NL
+
+            self.add(block)
+
+        return self
+
+    def __str__( self ):
+
+        return Element.__str__(self)
+
+
 class CommentElement(Element):
     """Comment
     .. This text will not be shown

@@ -21,6 +21,7 @@ class Document:
         "comment", #comment 
         "flist", #Field List
         "table", #Table
+        "lineblock", #Table
     )
 
     def __init__( self ):
