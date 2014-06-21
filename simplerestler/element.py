@@ -2,6 +2,8 @@
 import errors
 from utils import Utils
 
+NL = "\n"
+
 class Element:
     """Element."""
 
@@ -40,15 +42,15 @@ class UlElement(Element):
 
         self.params = args
 
-        self.add('\n')
+        self.add(NL)
 
         for arg in args:
 
             line = "* " + Utils.html_rest(arg)
             self.add(line)
-            self.add('\n')
+            self.add(NL)
         
-        self.add('\n')
+        self.add(NL)
 
         return self
 
@@ -66,16 +68,16 @@ class OlElement(Element):
 
         self.params = args
 
-        self.add('\n')
+        self.add(NL)
 
         i = 0
         for arg in args:
             i +=1 
             line = str(i) + ". " + Utils.html_rest(arg)
             self.add(line)
-            self.add('\n')
+            self.add(NL)
 
-        self.add('\n')
+        self.add(NL)
 
         return self
 
@@ -106,16 +108,16 @@ class FlistElement(Element):
         if len(kwargs) == 0:
             raise errors.DocumentError("No list fields.")
 
-        self.add('\n')
+        self.add(NL)
 
         if len(kwargs) > 1:
             for field in sorted(kwargs):
                 value = Utils.html_rest(kwargs[field])
 
                 self.add(':'+ field +': ' + value)
-                self.add('\n')
+                self.add(NL)
 
-        self.add('\n')
+        self.add(NL)
 
         return self
 
@@ -134,9 +136,9 @@ class HrElement(Element):
 
         self.params = "----"
 
-        self.add('\n')
+        self.add(NL)
         self.add('-----------')
-        self.add('\n')
+        self.add(NL)
 
         return self
 
@@ -162,9 +164,9 @@ class PElement(Element):
         text = Utils.html_rest(text)
         text = Utils.br_rest(text)
 
-        self.add('\n')
+        self.add(NL)
         self.add(text)
-        self.add('\n')
+        self.add(NL)
 
         return self
 
@@ -187,13 +189,13 @@ class PreElement(Element):
         elif len(args) != 0:
             text = args[0]
 
-        self.add('\n')
+        self.add(NL)
         self.add('::')
-        self.add('\n')
-        self.add('\n')
+        self.add(NL)
+        self.add(NL)
         self.add(' ')
         self.add(text)
-        self.add('\n')
+        self.add(NL)
 
         return self
 
@@ -221,11 +223,11 @@ class CommentElement(Element):
         if text is None:
             raise errors.InvalidElementError("text")
 
-        self.add('\n')
-        self.add('\n')
+        self.add(NL)
+        self.add(NL)
         self.add('.. ' + text)
-        self.add('\n')
-        self.add('\n')
+        self.add(NL)
+        self.add(NL)
 
         return self
 
@@ -260,17 +262,17 @@ class ImageElement(Element):
         if src is None:
             raise errors.InvalidElementError("src")
 
-        self.add('\n')
+        self.add(NL)
         self.add('.. image:: ' + src)
 
         if len(kwargs) > 1:
             for option in sorted(kwargs):
                 if option != "src":
-                    self.add('\n')
+                    self.add(NL)
                     self.add('   :'+option+': ' + kwargs[option])
                 pass
 
-        self.add('\n')
+        self.add(NL)
 
         return self
 
@@ -315,11 +317,11 @@ class TitleElement(Element):
 
         self.params = [text, underline]
 
-        self.add('\n')
+        self.add(NL)
         self.add(text)
-        self.add('\n')
+        self.add(NL)
         self.add(underline)
-        self.add('\n')
+        self.add(NL)
 
         return self
 
@@ -350,9 +352,9 @@ class LinkElement(Element):
 
         self.params = [text, href]
 
-        self.add('\n')
+        self.add(NL)
         self.add("`%s <%s>`_" % ( text, href ))
-        self.add('\n')
+        self.add(NL)
 
         return self
 
@@ -395,20 +397,20 @@ class DirectiveElement(Element):
         self.params = [type, title, text]
 
 
-        self.add('\n')
+        self.add(NL)
         self.add(".. %s:: %s" % ( type, title))
-        self.add('\n')
+        self.add(NL)
 
         if len(kwargs) > 1:
             for option in sorted(kwargs):
                 if option != "type" and option != "text" and option != "title":
                     self.add('   :'+option+': ' + kwargs[option])
-                    self.add('\n')
+                    self.add(NL)
                 pass
 
-        self.add('\n')
+        self.add(NL)
         self.add('    ' + text)
-        self.add('\n')
+        self.add(NL)
 
         return self
 
@@ -438,9 +440,9 @@ class TableElement(Element):
 
                 table = self.make_table(data)
 
-                self.add('\n')
+                self.add(NL)
                 self.add(table)
-                self.add('\n')
+                self.add(NL)
 
         return self
     
